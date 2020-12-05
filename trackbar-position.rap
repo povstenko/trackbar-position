@@ -45,3 +45,6 @@ Group=Added files,Assembly,Resources,Misc,Modules
 4=4
 [AutoLoad]
 AutoLoad=
+[RADebugBP]
+1=
+2=
