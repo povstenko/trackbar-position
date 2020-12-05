@@ -94,7 +94,7 @@ WndProc proc hWnd:HWND, uMsg:UINT, wParam:WPARAM, lParam:LPARAM
 	.ELSEIF eax == WM_HSCROLL
 		invoke SendMessage, hTrack, TBM_GETPOS, 0, 0
 		
-		invoke MessageBox, 0, 0, 0, MB_OK
+		invoke SendMessage, hProgress, PBM_SETPOS, eax, 0
 	.ELSE
 		invoke DefWindowProc,hWnd,uMsg,wParam,lParam		
 		ret
