@@ -82,16 +82,19 @@ WinMain endp
 WndProc proc hWnd:HWND, uMsg:UINT, wParam:WPARAM, lParam:LPARAM
 	
 	mov eax,uMsg	; запишемо повідомлення  у регістр еах, для простоти
-	.IF eax==WM_DESTROY
+	.IF eax == WM_DESTROY
 		invoke PostQuitMessage,NULL
-	.ELSEIF eax==WM_CREATE
+	.ELSEIF eax == WM_CREATE
 	.elseif eax == WM_COMMAND		; якщо виконання якась команда
 		mov eax,hButton	
 		.if lParam == eax			; перевіримо, якщо lParam  = хендлу кнопки (кнопка натиснута)
 			invoke GetWindowText,hEdit,addr buf,MAX_PATH	; візьмемо текст з вікна-стрічки і запишемо у буфер buf
 			invoke MessageBox,0,addr buf,addr szCaptin,MB_OK	; виведемо 
 		.endif
-
+	.ELSEIF eax == WM_HSCROLL
+		invoke SendMessage, hTrack, TBM_GETPOS, 0, 0
+		
+		invoke MessageBox, 0, 0, 0, MB_OK
 	.ELSE
 		invoke DefWindowProc,hWnd,uMsg,wParam,lParam		
 		ret
