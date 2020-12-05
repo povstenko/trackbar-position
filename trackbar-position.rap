@@ -1,0 +1,47 @@
+[Project]
+Assembler=Masm
+Type=Win32 App
+Description=trackbar-position
+Backup=$P\Bak\
+Group=1
+GroupExpand=1
+[Files]
+1=trackbar-position.Asm
+2=trackbar-position.Inc
+3=trackbar-position.Rc
+4=trackbar-position.Txt
+[MakeFiles]
+0=trackbar-position.rap
+1=trackbar-position.rc
+2=trackbar-position.asm
+3=trackbar-position.obj
+4=trackbar-position.res
+5=trackbar-position.exe
+6=trackbar-position.def
+7=trackbar-position.dll
+8=trackbar-position.txt
+9=trackbar-position.lib
+10=trackbar-position.mak
+11=trackbar-position.hla
+12=trackbar-position.com
+13=trackbar-position.ocx
+14=trackbar-position.idl
+15=trackbar-position.tlb
+16=trackbar-position.sys
+[MakeDef]
+Menu=1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0
+1=4,O,$B\RC.EXE /v,1
+2=3,O,$B\ML.EXE /c /coff /Cp /nologo /I"$I",2
+3=5,O,$B\LINK.EXE /SUBSYSTEM:WINDOWS /RELEASE /VERSION:4.0 /LIBPATH:"$L" /OUT:"$5",3,4
+4=0,0,,5
+5=rsrc.obj,O,$B\CVTRES.EXE,rsrc.res
+6=*.obj,O,$B\ML.EXE /c /coff /Cp /nologo /I"$I",*.asm
+7=0,0,"$E\OllyDbg",5
+[Group]
+Group=Added files,Assembly,Resources,Misc,Modules
+1=2
+2=2
+3=3
+4=4
+[AutoLoad]
+AutoLoad=
