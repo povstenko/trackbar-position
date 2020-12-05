@@ -44,18 +44,25 @@ WinMain proc hInst:HINSTANCE,hPrevInst:HINSTANCE,CmdLine:LPSTR,CmdShow:DWORD
 	
 	INVOKE CreateWindowEx,NULL,ADDR ClassName,ADDR AppName,\
            WS_OVERLAPPEDWINDOW,CW_USEDEFAULT,\
-           CW_USEDEFAULT,CW_USEDEFAULT,CW_USEDEFAULT,NULL,NULL,\
+           CW_USEDEFAULT,740,500,NULL,NULL,\
            hInst,NULL
 	mov   hwnd,eax
 	
-	invoke CreateWindowEx,WS_EX_CLIENTEDGE,addr szEdit,addr szEdit_text,\ ; стрічка вводу
-			ES_CENTER or WS_VISIBLE or WS_CHILD,\
-			10,10,150,20,hwnd,0,hInstance,0
-	mov hEdit,eax					; збережемо хендл в змінну
-	invoke CreateWindowEx,NULL,addr szButton,addr szButton_title,\		; кнопка
-			BS_BOTTOM or BS_CENTER or WS_CHILD or WS_VISIBLE,\
-			10,60,70,20,hwnd,0,hInstance,0
-	mov hButton,eax	
+	
+	invoke CreateWindowEx,NULL,addr szTrack,0,\
+			WS_CHILD or WS_VISIBLE,\
+			10,10,700,50,hwnd,0,hInstance,0
+	mov hTrack,eax	
+	
+	invoke CreateWindowEx,NULL,addr szProgress,0,\
+			WS_CHILD or WS_VISIBLE or WS_BORDER,\
+			10,70,700,50,hwnd,0,hInstance,0
+	mov hProgress,eax
+	
+	invoke CreateWindowEx,NULL,addr szScroll,0,\
+			WS_CHILD or WS_VISIBLE or WS_BORDER,\
+			10,130,700,40,hwnd,0,hInstance,0
+	mov hScroll,eax	
 
 	
 	invoke ShowWindow, hwnd,SW_SHOWNORMAL
@@ -79,7 +86,7 @@ WndProc proc hWnd:HWND, uMsg:UINT, wParam:WPARAM, lParam:LPARAM
 		invoke PostQuitMessage,NULL
 	.ELSEIF eax==WM_CREATE
 	.elseif eax == WM_COMMAND		; якщо виконання якась команда
-		mov eax,hButton		
+		mov eax,hButton	
 		.if lParam == eax			; перевіримо, якщо lParam  = хендлу кнопки (кнопка натиснута)
 			invoke GetWindowText,hEdit,addr buf,MAX_PATH	; візьмемо текст з вікна-стрічки і запишемо у буфер buf
 			invoke MessageBox,0,addr buf,addr szCaptin,MB_OK	; виведемо 
