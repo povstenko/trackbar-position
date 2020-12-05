@@ -63,7 +63,8 @@ WinMain proc hInst:HINSTANCE,hPrevInst:HINSTANCE,CmdLine:LPSTR,CmdShow:DWORD
 			WS_CHILD or WS_VISIBLE or WS_BORDER,\
 			10,130,700,40,hwnd,0,hInstance,0
 	mov hScroll,eax	
-
+	
+	invoke SetScrollRange, hScroll, SB_CTL, 0, 100, TRUE
 	
 	invoke ShowWindow, hwnd,SW_SHOWNORMAL
 	invoke UpdateWindow, hwnd
@@ -95,6 +96,8 @@ WndProc proc hWnd:HWND, uMsg:UINT, wParam:WPARAM, lParam:LPARAM
 		invoke SendMessage, hTrack, TBM_GETPOS, 0, 0
 		
 		invoke SendMessage, hProgress, PBM_SETPOS, eax, 0
+		invoke SendMessage, hScroll, SBM_SETPOS, eax, TRUE
+		
 	.ELSE
 		invoke DefWindowProc,hWnd,uMsg,wParam,lParam		
 		ret
