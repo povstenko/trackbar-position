@@ -29,7 +29,7 @@ WinMain proc hInst:HINSTANCE,hPrevInst:HINSTANCE,CmdLine:LPSTR,CmdShow:DWORD
 	mov   wc.cbWndExtra,NULL
 	push  hInstance
 	pop   wc.hInstance
-	mov   wc.hbrBackground,COLOR_BTNFACE+1
+	mov   wc.hbrBackground,COLOR_WINDOW+1
 	mov   wc.lpszMenuName,NULL
 	mov   wc.lpszClassName,OFFSET ClassName
 	
@@ -60,7 +60,7 @@ WinMain proc hInst:HINSTANCE,hPrevInst:HINSTANCE,CmdLine:LPSTR,CmdShow:DWORD
 	mov hProgress,eax
 	
 	invoke CreateWindowEx,NULL,addr szScroll,0,\
-			WS_CHILD or WS_VISIBLE or WS_BORDER,\
+			WS_CHILD or WS_VISIBLE,\
 			10,130,700,40,hwnd,0,hInstance,0
 	mov hScroll,eax	
 	
