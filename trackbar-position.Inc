@@ -30,8 +30,6 @@ WinMain proto :DWORD,:DWORD,:DWORD,:DWORD
    hInstance HINSTANCE ?
    CommandLine LPSTR ?
 
-   hEdit		dd ?
-   hButton		dd ?
    hScroll		dd ?
    hTrack		dd ?
    hProgress	dd ?

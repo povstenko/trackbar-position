@@ -59,7 +59,7 @@ MilestoneOnTime=2
 MilestoneOnDate=0
 MilestoneOnDateWhen=1
 MilestoneOnDateStatus=0
-MilestoneOnDateDate=6
+MilestoneOnDateDate=7
 MilestoneOnDateTimeYear=2020
 MilestoneOnDateTimeMonth=12
 MilestoneOnDateTimeDate=5
@@ -92,7 +92,7 @@ ProductVer4Range=0
 6=00FFFFFF
 7=00FFFFFF
 [PTimer]
-PTimer=20360438
+PTimer=21236469
 [GroupExpand]
 GroupExpand=0,1,1,0,1,0
 [BookMark]
@@ -113,8 +113,8 @@ GroupExpand=0,1,1,0,1,0
 1=
 2=
 [Size]
-3=0,0,0,0,0
-1=0,0,0,0,2725
+3=0,0,0,0,39
+1=0,0,0,0,488
 2=0,0,0,0,576
 [Resource]
 1=1,0,8,..\..\..\..\..\ASM\ASM\Masm\Sniplets\Code\2.XML
