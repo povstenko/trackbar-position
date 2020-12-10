@@ -82,11 +82,11 @@ WinMain endp
 
 WndProc proc hWnd:HWND, uMsg:UINT, wParam:WPARAM, lParam:LPARAM
 	
-	mov eax,uMsg	; запишемо повідомлення  у регістр еах, для простоти
+	mov eax,uMsg
 	.IF eax == WM_DESTROY
 		invoke PostQuitMessage,NULL
 	.ELSEIF eax == WM_CREATE
-	.elseif eax == WM_COMMAND		; якщо виконання якась команда
+	.elseif eax == WM_COMMAND
 		
 	.ELSEIF eax == WM_HSCROLL
 		invoke SendMessage, hTrack, TBM_GETPOS, 0, 0
