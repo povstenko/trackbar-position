@@ -22,6 +22,7 @@ WinMain proto :DWORD,:DWORD,:DWORD,:DWORD
    szTrack db 'msctls_trackbar32', 0
    szProgress db 'msctls_progress32', 0
    
+   pos dd 0
    buf			db MAX_PATH dup(0)	; буфер куди ми будемо писати вміст вікна-стрічки
    szCaptin		db 'Title.....',0		; заголовок MessageBox'а
 

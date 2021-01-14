@@ -50,7 +50,7 @@ WinMain proc hInst:HINSTANCE,hPrevInst:HINSTANCE,CmdLine:LPSTR,CmdShow:DWORD
 	
 	
 	invoke CreateWindowEx,NULL,addr szTrack,0,\
-			WS_CHILD or WS_VISIBLE,\
+			WS_CHILD or WS_VISIBLE or TBS_AUTOTICKS,\
 			10,10,700,50,hwnd,0,hInstance,0
 	mov hTrack,eax	
 	
@@ -62,9 +62,10 @@ WinMain proc hInst:HINSTANCE,hPrevInst:HINSTANCE,CmdLine:LPSTR,CmdShow:DWORD
 	invoke CreateWindowEx,NULL,addr szScroll,0,\
 			WS_CHILD or WS_VISIBLE,\
 			10,130,700,40,hwnd,0,hInstance,0
-	mov hScroll,eax	
+	mov hScroll,eax
 	
 	invoke SetScrollRange, hScroll, SB_CTL, 0, 100, TRUE
+	invoke SendMessage, hTrack, TBM_SETTICFREQ, 100, 0
 	
 	invoke ShowWindow, hwnd,SW_SHOWNORMAL
 	invoke UpdateWindow, hwnd
@@ -86,13 +87,32 @@ WndProc proc hWnd:HWND, uMsg:UINT, wParam:WPARAM, lParam:LPARAM
 	.IF eax == WM_DESTROY
 		invoke PostQuitMessage,NULL
 	.ELSEIF eax == WM_CREATE
-	.elseif eax == WM_COMMAND
-		
+	.ELSEIF eax == WM_COMMAND
+	
+	.ELSEIF eax==WM_KEYDOWN
+		mov		eax,lParam
+		shr		eax,16
+		and		eax,7FFFh
+		.if eax==014Dh
+			;Right
+			add pos, 1
+			invoke SendMessage, hTrack, TBM_SETPOS, pos, TRUE
+			invoke SendMessage, hProgress, PBM_SETPOS, pos, 0
+			invoke SendMessage, hScroll, SBM_SETPOS, pos, TRUE
+		.elseif eax==014Bh
+			;Left
+			sub pos, 1
+			invoke SendMessage, hTrack, TBM_SETPOS, pos, TRUE
+			invoke SendMessage, hProgress, PBM_SETPOS, pos, 0
+			invoke SendMessage, hScroll, SBM_SETPOS, pos, TRUE
+		.endif
 	.ELSEIF eax == WM_HSCROLL
+;		invoke MessageBox,0,0,0,0
 		invoke SendMessage, hTrack, TBM_GETPOS, 0, 0
+		mov pos, eax
 		
-		invoke SendMessage, hProgress, PBM_SETPOS, eax, 0
-		invoke SendMessage, hScroll, SBM_SETPOS, eax, TRUE
+		invoke SendMessage, hProgress, PBM_SETPOS, pos, 0
+		invoke SendMessage, hScroll, SBM_SETPOS, pos, TRUE
 		
 	.ELSE
 		invoke DefWindowProc,hWnd,uMsg,wParam,lParam		
