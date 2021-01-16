@@ -107,7 +107,7 @@ WndProc proc hWnd:HWND, uMsg:UINT, wParam:WPARAM, lParam:LPARAM
 			invoke SendMessage, hScroll, SBM_SETPOS, pos, TRUE
 		.endif
 	.ELSEIF eax == WM_HSCROLL
-;		invoke MessageBox,0,0,0,0
+
 		invoke SendMessage, hTrack, TBM_GETPOS, 0, 0
 		mov pos, eax
 		
